@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	attr_accessor :remember_token
+
 	before_save {self.email = self.email.downcase}
 
 	# email regex validation
@@ -10,4 +12,27 @@ class User < ApplicationRecord
 	# add password to the user validation
 	has_secure_password
 	validates :password, presence: true, length: {minimum: 6}
+
+	def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+	def self.get_token
+		SecureRandom.urlsafe_base64
+	end
+
+	def remember
+		self.remember_token = User.get_token
+		update_attribute(:remember_digest, User.digest(remember_token))
+	end
+
+	def authenticated?(remember_token)
+		return false if remember_digest.nil?
+		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	end
+
+	def forget
+		update_attribute(:remember_digest, nil)
+	end
 end
