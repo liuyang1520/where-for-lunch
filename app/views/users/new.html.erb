@@ -1,2 +1,38 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'Sign Up') %>
+<h1>Sign Up</h1>
+
+<div class="container">
+	<%= form_for @user, {html: {class: "form-horizontal"}} do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<div class="form-group row">
+			<%= f.label :name, "User Name", class: "col-sm-3 control-label" %>
+			<div class="col-sm-8">
+				<%= f.text_field :name, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label :email, "Email Address", class: "col-sm-3 control-label" %>
+			<div class="col-sm-8">
+				<%= f.text_field :email, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label :password, class: "col-sm-3 control-label" %>
+			<div class="col-sm-8">
+				<%= f.text_field :password, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label :password_confirmation, "Password Again", class: "col-sm-3 control-label" %>
+			<div class="col-sm-8">
+				<%= f.text_field :password_confirmation, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-offset-3 col-sm-10">
+				<%= button_tag "Reset", class: "btn btn-default", type: :reset %>
+				<%= f.submit "Submit", class: "btn btn-primary" %>
+			</div>
+		</div>
+	<% end %>
+</div>
