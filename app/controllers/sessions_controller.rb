@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
 	  	else
 	  		forget_user user
 	  	end
-	  	debugger
   		redirect_to user
   	else
   		render 'new'
