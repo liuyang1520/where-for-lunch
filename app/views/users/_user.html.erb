@@ -1,0 +1,17 @@
+<li class="list-group-item">
+	<div class="row">
+		<div class="col-xs-1 col-md-1 vcenter">
+			<%= user_icon_image(user) %>
+		</div>
+		<div class="col-xs-3 col-md-2 vcenter">
+			<a class="vcenter"></a>
+			<%= link_to user.name, user, class: "vcenter"%>
+		</div>
+		<div class="col-xs-3 col-md-2 vcenter pull-right">
+			<p class="vcenter">
+				<a href="<%= edit_user_path(user) %>" class="btn btn-warning" role="button">Edit</a>
+				<a href="#" class="btn btn-danger" role="button">Delete</a>
+			</p>
+		</div>
+  </div>
+</li>

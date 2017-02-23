@@ -12,7 +12,7 @@ User.create(name: "admin",
 						password_confirmation: "test123456",
 						admin: true)
 
-10.times do |i|
+100.times do |i|
 	User.create(name: "test" + (i+1).to_s,
 							email: "test#{i+1}@test.com",
 							password: "test123456",

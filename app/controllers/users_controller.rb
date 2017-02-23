@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :check_logged_in, only: [:edit, :update]
+  before_action :check_logged_in, only: [:show, :edit, :update, :index, :destroy]
   before_action :check_user, only: [:show, :edit, :update]
+  before_action :check_admin, only: [:index, :destroy]
 
   def show
   	@user = User.find(params[:id])
@@ -8,6 +9,10 @@ class UsersController < ApplicationController
 
   def new
   	@user = User.new
+  end
+
+  def index
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -36,6 +41,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find(params[:id])
+    flash[:success] = "Delete #{user.name}"
+    user.destroy
+    redirect_to users_url
+  end
+
   def check_logged_in
     if !logged_in?
       store_forward_url
@@ -46,8 +58,15 @@ class UsersController < ApplicationController
 
   def check_user
     @user = User.find(params[:id])
-    if !current_user.admin? && @user != current_user
-      flash[:warning] = "Permission denied"
+    if !is_admin? && @user != current_user
+      flash[:warning] = "Permission denied, can only view people in the same group"
+      redirect_to current_user
+    end
+  end
+
+  def check_admin
+    if !is_admin?
+      flash[:warning] = "Permission denied, need admin user"
       redirect_to current_user
     end
   end

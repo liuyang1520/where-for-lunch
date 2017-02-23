@@ -23,6 +23,10 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def is_admin?
+		current_user.admin?
+	end
+
 	def log_out
 		forget_user(current_user)
 		session.delete(:user_id)

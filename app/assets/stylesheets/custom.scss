@@ -21,3 +21,10 @@
     color: $state-danger-text;
   }
 }
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  margin: 0;
+}
