@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 	  	else
 	  		forget_user user
 	  	end
-  		redirect_to user
+  		redirect_back_or user
   	else
   		render 'new'
   	end
