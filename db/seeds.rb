@@ -13,8 +13,8 @@ User.create(name: "admin",
 						admin: true)
 
 10.times do |i|
-	User.create(name: "test" + i.to_s,
-							email: "test#{i}@test.com",
+	User.create(name: "test" + (i+1).to_s,
+							email: "test#{i+1}@test.com",
 							password: "test123456",
 							password_confirmation: "test123456")
 end

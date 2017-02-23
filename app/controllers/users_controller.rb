@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def check_user
     @user = User.find(params[:id])
-    if @user != current_user
+    if !current_user.admin? && @user != current_user
       flash[:warning] = "Permission denied"
       redirect_to current_user
     end
