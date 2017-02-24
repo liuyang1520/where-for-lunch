@@ -10,11 +10,15 @@ User.create(name: "admin",
 						email: "liuyang1520@gmail.com",
 						password: "test123456",
 						password_confirmation: "test123456",
-						admin: true)
+						admin: true,
+						activated: true,
+						activated_at: Time.zone.now)
 
 100.times do |i|
 	User.create(name: "test" + (i+1).to_s,
 							email: "test#{i+1}@test.com",
 							password: "test123456",
-							password_confirmation: "test123456")
+							password_confirmation: "test123456",
+							activated: true,
+							activated_at: Time.zone.now)
 end

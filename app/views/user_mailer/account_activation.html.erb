@@ -1,0 +1,17 @@
+<h1>Account Activation</h1>
+
+<p>
+  Hi, <%= @user.name %>,
+</p>
+
+<p>
+	Please click the link below to activate your account!
+</p>
+
+<% temp_url = edit_account_activation_url(@user.activation_token, email: @user.email) %>
+<%= link_to "Activate!", temp_url %>
+
+<p>
+	If the link above doesn't work for your browser, please copy the url below to your browser manually,
+</p>
+<p><%= temp_url %></p>
